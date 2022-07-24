@@ -10,7 +10,7 @@
 		SELECT 	EMAIL,
 				PASSWORD
 		FROM  	USERS
-		WHERE 　 EMAIL = #{email}
+		WHERE   EMAIL = #{email}
 	]]>
 	</select>
 	<resultMap type="com.shoppingsite.auth.User" id="userDetails">

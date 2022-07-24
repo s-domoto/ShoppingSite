@@ -26,10 +26,4 @@ public class LoginController {
 		model.addAttribute("errorMsg", "ログイン認証に失敗しました");
 		return "/login";
 	}
-
-	@PostMapping("/login")
-	public ModelAndView displayIndexPage(ModelAndView mav) {
-		
-		return mav;
-	}
 }
