@@ -20,7 +20,10 @@ public class SecurityConfig {
 				.failureUrl("/login?error")
 				.permitAll()
 				).logout(logout -> logout
+						.logoutUrl("/logout")
 						.logoutSuccessUrl("/")
+						.deleteCookies("JSESSIONID")
+						.invalidateHttpSession(true)
 						).authorizeHttpRequests(ahr -> ahr
 								.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 								.mvcMatchers("/").permitAll()
