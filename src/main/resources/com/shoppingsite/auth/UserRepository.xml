@@ -8,7 +8,8 @@
 	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails">
 	<![CDATA[
 		SELECT 	EMAIL,
-				PASSWORD
+				PASSWORD,
+				USER_NAME
 		FROM  	USERS
 		WHERE   EMAIL = #{email}
 	]]>
@@ -16,5 +17,6 @@
 	<resultMap type="com.shoppingsite.auth.User" id="userDetails">
 		<result property="email" column="EMAIL" />
 		<result property="password" column="PASSWORD" />
+		<result property="username" column="USER_NAME" />
 	</resultMap>
  </mapper>

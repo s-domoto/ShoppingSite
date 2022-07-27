@@ -9,6 +9,7 @@ public class User implements UserDetails {
 
 	private String email;
 	private String password;
+	private String username;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -26,7 +27,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return null;
+		return username;
 	}
 
 	@Override
@@ -55,5 +56,8 @@ public class User implements UserDetails {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

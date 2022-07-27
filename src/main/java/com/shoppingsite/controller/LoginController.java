@@ -16,10 +16,10 @@ public class LoginController {
 
 	@GetMapping("/")
 	public String index(Model model, @AuthenticationPrincipal User user) {
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		if (user == null) {
 			return "login";
 		}
+		model.addAttribute("name", user.getUsername());
 		return "index";
 	}
 	@GetMapping("/login")
