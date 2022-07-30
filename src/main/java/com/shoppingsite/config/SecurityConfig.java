@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import com.shoppingsite.auth.CustomAuthenticationFailureHandler;
 
 @Configuration
 public class SecurityConfig {
@@ -16,8 +19,13 @@ public class SecurityConfig {
 		http.formLogin(login -> login
 				.loginProcessingUrl("/login")
 				.loginPage("/login").usernameParameter("email").passwordParameter("password")
+				// 認証失敗時はメールアドレスの入力値を保持するためにカスタムのハンドラを使う
+				.failureHandler(customAuthenticationFailureHandler())
 				.defaultSuccessUrl("/")
-				.failureUrl("/login?error")
+//				.failureUrl("/login?error")
+//				.failureHandler((req, res, exp) -> {
+//					res.sendRedirect("/login?error=true&email=" + req.getParameter("email"));
+//				})
 				.permitAll()
 				).logout(logout -> logout
 						.logoutUrl("/logout")
@@ -32,6 +40,11 @@ public class SecurityConfig {
 		return http.build();
 
 	}
+
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
